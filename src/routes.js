@@ -37,7 +37,6 @@ Coded by www.creative-tim.com
 
 // Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
-import Service from "layouts/service";
 import Category from "layouts/category";
 import Product from "layouts/product";
 
@@ -56,11 +55,19 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Service",
-    key: "service",
-    icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/service",
-    component: <Service />,
+    name: "Order",
+    key: "order",
+    icon: <Icon fontSize="small">dashboard</Icon>,
+    route: "/order",
+    // component: <Dashboard />,
+  },
+  {
+    type: "collapse",
+    name: "Customer",
+    key: "customer",
+    icon: <Icon fontSize="small">dashboard</Icon>,
+    route: "/customer",
+    // component: <Dashboard />,
   },
   {
     type: "collapse",
@@ -78,7 +85,14 @@ const routes = [
     route: "/product",
     component: <Product />,
   },
-  
+  {
+    type: "collapse",
+    name: "Store",
+    key: "store",
+    icon: <Icon fontSize="small">notifications</Icon>,
+    route: "/store",
+    // component: <Product />,
+  },
 ];
 
 export default routes;

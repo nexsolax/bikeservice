@@ -27,13 +27,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
-import { action } from "react-table";
-import { Edit } from "@mui/icons-material";
 import MDTypography from "components/MDTypography";
 import ModeIcon from "@mui/icons-material/Mode";
-import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
-import DoneIcon from "@mui/icons-material/Done";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function ProductTable() {
@@ -47,20 +42,14 @@ export default function ProductTable() {
     setOpen(false);
   };
 
-  const handleClick = () => {
-    console.info("You clicked the Chip.");
-  };
-
-  const handleDelete = () => {
-    console.info("You clicked the delete icon.");
-  };
 
   const [rows, setRows] = useState([]);
   useEffect(() => {
     // sua lai api
     axios(
-      `https://nmrp3a0bjc.execute-api.us-east-1.amazonaws.com/Prod/api/Product/get-all-product`,
+      
       {
+        url: `https://nmrp3a0bjc.execute-api.us-east-1.amazonaws.com/Prod/api/Product/get-all-product`,
         method: "GET",
         mode: "no-cors",
       }
@@ -83,10 +72,10 @@ export default function ProductTable() {
     ],
 
     rows: [
-      // ...rows,
+      ...rows,
       // {actions : "Edit"},
       {
-        ...rows,
+        
 
         action: (
           <>
