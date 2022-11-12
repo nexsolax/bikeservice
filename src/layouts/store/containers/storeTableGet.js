@@ -62,7 +62,7 @@ export default function StoreTable() {
       },
       { Header: "Phone", accessor: "phoneNumber", align: "left" },
       { Header: "Address", accessor: "address", align: "center" },
-      { Header: "Ward", accessor: "ward", align: "center" },
+      
       { Header: "Actions", accessor: "actions", align: "center" },
      
     ],

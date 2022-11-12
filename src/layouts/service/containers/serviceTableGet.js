@@ -105,7 +105,7 @@ export default function ServiceTable(){
   return {
     columns: [
       {
-        Header: "Name service",
+        Header: "Name service and product",
         accessor: "name",
         align: "left",
       },
