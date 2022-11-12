@@ -87,6 +87,7 @@ class Api
         config['method'] = method;
         config['url'] = url;
         config['responseType'] = responseType;
+        config['Access-Control-Allow-Origin'] = 'http://54.211.24.168';
         config['headers'] = {
             'Content-Type': contentType
         };
