@@ -24,22 +24,24 @@ const MDModalDialog = (
                 {children}
                 <MDBox
                     mt={3}
-                    sx={{display:'flex',justifyContent:'left'}}
+                    sx={{display:'flex',justifyContent:'center',alignItem:'center'}}
                 >
                     <Button 
                         onClick={handleSubmit}
                         variant="contained"
                         disabled={confirmDisable}
+                        sx={{mr:'10px',color:'#000'}}
                     >
-                        <Typography>
+                        <Typography sx={{color:'#000'}}>
                             Submit
                         </Typography>
                     </Button>
                     <Button 
                         onClick={handleCloseDialog}
                         variant="contained"
+                        sx={{color:'#000'}}
                     >
-                        <Typography>
+                        <Typography sx={{color:'#000'}}> 
                             Cancel
                         </Typography>
                     </Button>

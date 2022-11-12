@@ -105,17 +105,17 @@ function Service() {
   */
   const validateSubmit = () => {
     const { rowData } = dialog;
+  
+
+    return _.isEmpty(rowData.name) ||
+            isNaN(rowData.price) ||
+            isNaN(rowData.quantity) ||
+            !_.isObject(rowData.manufacturer) ||
+            !_.isObject(rowData.category) ||
+            !_.isObject(rowData.store) ||
+            isNaN(rowData.isActive) ||
+            isNaN(rowData.isService) 
     
-    return (
-      _.isEmpty(rowData.name) ||
-      isNaN(rowData.price) ||
-      isNaN(rowData.quantity) ||
-      !_.isObject(rowData.manufacturer) ||
-      !_.isObject(rowData.category) ||
-      !_.isObject(rowData.store) ||
-      isNaN(rowData.isActive) ||
-      isNaN(rowData.isService) 
-    );
   };
 
   /*

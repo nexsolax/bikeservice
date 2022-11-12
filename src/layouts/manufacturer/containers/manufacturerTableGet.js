@@ -58,7 +58,7 @@ export default function ManufacturerTable(){
     //https://bobbyhadz.com/blog/react-hook-useeffect-has-missing-dependency
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log('Nghi',manufacturers)
+
   return {
     columns: [
       {

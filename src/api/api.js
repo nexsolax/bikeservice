@@ -178,9 +178,19 @@ class Api
 
     CreateStore(rowData)
     {
-        
+        const {
+            name,
+            address,
+            phoneNumber,
+            wardId
+        } = rowData;
         const payload = {
-            data : rowData
+            data : {
+                name,
+                address,
+                phoneNumber,
+                wardId:wardId.id
+            }
         }
 
         return this.Request('post',`${this.baseURL}/api/Store`,payload)  

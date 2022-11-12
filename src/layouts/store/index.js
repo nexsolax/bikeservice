@@ -12,7 +12,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import { useState,useMemo } from "react";
+import { useState, useMemo } from "react";
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -41,37 +41,31 @@ import Api from "api/api";
 import StoreDelete from "./containers/storeDelete";
 import EventFeature from "hooks";
 
-
-
-
-
-  /*
+/*
   =========================================================
   * Define Init UI 
         ** Update: Change 2 Button into Component to reduce render 
   =========================================================
   */
-  const Actions = ({row,handleOpenEditDialog,handleOpenDeleteDialog}) => {
-    return (
-      <MDBox>
-        <Button startIcon={<EditIcon />} onClick={(e) => handleOpenEditDialog(e)(row)} />
-        <Button startIcon={<DeleteIcon />} onClick={(e) => handleOpenDeleteDialog(e)(row)} />
-      </MDBox>
-    );
-  };
+const Actions = ({ row, handleOpenEditDialog, handleOpenDeleteDialog }) => {
+  return (
+    <MDBox>
+      <Button startIcon={<EditIcon />} onClick={(e) => handleOpenEditDialog(e)(row)} />
+      <Button startIcon={<DeleteIcon />} onClick={(e) => handleOpenDeleteDialog(e)(row)} />
+    </MDBox>
+  );
+};
 
-  const baseData = {
-    name: "",
-    phoneNumber:"",
-    address:"",
-    wardId:0
-  };
+const baseData = {
+  name: "",
+  phoneNumber: "",
+  address: "",
+  wardId: "",
+};
 
-  const dataArr = Object.keys(baseData)
-
+const dataArr = Object.keys(baseData);
 
 function Store() {
-
   /**
   =========================================================
   * Define Variable and State
@@ -79,12 +73,8 @@ function Store() {
   */
 
   const [dialog, setDialog] = useState({ open: false, type: "", rowData: "" });
-  const { 
-    columns, 
-    rows,
-    wards
-  } = StoreTable();
-  const { doLoading, doError } = EventFeature() 
+  const { columns, rows, wards } = StoreTable();
+  const { doLoading, doError } = EventFeature();
   /*
   =========================================================
   *  Function for Dialog:
@@ -99,23 +89,24 @@ function Store() {
   const handleCloseDialog = () =>
     setDialog((prev) => ({ ...prev, open: false, type: "", rowData: "" }));
 
-  
   /*
   =========================================================
   *  Validate Input Field after submit
   =========================================================
   */
-  const validateSubmit = () =>
-  {
+  const validateSubmit = () => {
     const { rowData } = dialog;
-    return ( 
-      _.isEmpty(rowData.name) || 
-      _.isEmpty(rowData.phoneNumber) || 
-      _.isEmpty(rowData.address) || 
-        isNaN(rowData.wardId)
-      )
-
-  }
+    console.log('NGhi1',_.isEmpty(rowData.name))
+    console.log('NGhi2',_.isEmpty(rowData.phoneNumber))
+    console.log('NGhi3',_.isEmpty(rowData.address) )
+    console.log('NGhi4',_.isObject(rowData.wardId))
+    return (
+      _.isEmpty(rowData.name) ||
+      _.isEmpty(rowData.phoneNumber) ||
+      _.isEmpty(rowData.address) ||
+      _.isNaN(rowData.wardId?.id)
+    );
+  };
 
   /*
   =========================================================
@@ -124,74 +115,57 @@ function Store() {
         + Value and Name for AutoComplete
   =========================================================
   */
-  const handleChange = (key,value) =>
-  {
-     setDialog((prev) => {
+  const handleChange = (key, value) => {
+    setDialog((prev) => {
       return {
         ...prev,
         rowData: {
           ...prev.rowData,
-          [key]: key === 'wardId' ? +value : value
+          [key]: value,
         },
       };
-    }
-    );
-  }
-  const handleSubmit = async () => 
-  {
-    const { 
-      type, 
-      rowData 
-    } = dialog;
+    });
+  };
+  console.log('Nghi',dialog.rowData)
+  const handleSubmit = async () => {
+    const { type, rowData } = dialog;
 
     let api;
     try {
-      (type === 'add' && await ( api = Api.CreateStore(rowData))) || 
-      (type === 'edit' && await ( api = Api.EditStore(rowData))) ||
-      (type === 'delete' && await ( api = Api.DeleteStore(rowData)))
+      (type === "add" && (await (api = Api.CreateStore(rowData)))) ||
+        (type === "edit" && (await (api = Api.EditStore(rowData)))) ||
+        (type === "delete" && (await (api = Api.DeleteStore(rowData))));
 
-     if(api){
-        handleCloseDialog()
-        doLoading(false)
+      if (api) {
+        handleCloseDialog();
+        doLoading(false);
         window.location.reload(true);
-
       }
-    } catch(err) {
-      doError({ ...err, error: true, message:err.message })
-      handleCloseDialog()
-      doLoading(false)
+    } catch (err) {
+      doError({ ...err, error: true, message: err.message });
+      handleCloseDialog();
+      doLoading(false);
     }
-
   };
-
-
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <MDModalDialog
         open={dialog.open}
-        confirmDisable={dialog.type === 'delete' ? false : validateSubmit() }
+        confirmDisable={dialog.type === "delete" ? false : validateSubmit()}
         handleSubmit={handleSubmit}
         handleCloseDialog={handleCloseDialog}
       >
-        {
-        ((dialog.type === "add" || dialog.type === "edit") && (
-          <StoreCreateEdit 
+        {(dialog.type === "add" || dialog.type === "edit") && (
+          <StoreCreateEdit
             type={dialog.rowData}
             rowData={dialog.rowData}
-            handleChange={handleChange}   
+            handleChange={handleChange}
             wards={wards}
           />
-        ))
-        }
-        {
-          (dialog.type === "delete" && (
-            <StoreDelete 
-              rowData={dialog.rowData}
-            />
-          ))
-        }
+        )}
+        {dialog.type === "delete" && <StoreDelete rowData={dialog.rowData} />}
       </MDModalDialog>
 
       <MDBox pt={6} pb={3}>
@@ -220,7 +194,16 @@ function Store() {
                 <DataTable
                   table={{
                     columns,
-                    rows: _.map([...rows] || [], (row) => ({ ...row, actions: <Actions row={row} handleOpenEditDialog={handleOpenEditDialog} handleOpenDeleteDialog={handleOpenDeleteDialog} /> })),
+                    rows: _.map([...rows] || [], (row) => ({
+                      ...row,
+                      actions: (
+                        <Actions
+                          row={row}
+                          handleOpenEditDialog={handleOpenEditDialog}
+                          handleOpenDeleteDialog={handleOpenDeleteDialog}
+                        />
+                      ),
+                    })),
                   }}
                   isSorted={false}
                   entriesPerPage={false}

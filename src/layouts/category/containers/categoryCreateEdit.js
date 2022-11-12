@@ -6,17 +6,10 @@ import {
   RadioGroup,
   Radio,
   FormControlLabel,
+  Grid,
 } from "@mui/material";
 
-
-
-const CategoryCreateEdit = ({ 
-    rowData, 
-    handleChange
-    
-  }) => {
-
-  
+const CategoryCreateEdit = ({ rowData, handleChange }) => {
   return (
     <div>
       <DialogTitle>Create new category</DialogTitle>
@@ -27,25 +20,15 @@ const CategoryCreateEdit = ({
       </DialogContentText>
 
       <FormControl fullWidth>
-        <TextField
-          name="name"
-          label="Name"
-          variant="outlined"
-          onChange={(e) => handleChange("name", e.target.value)}
-          fullWidth
-          value={rowData.name}
-          required
-        />
-        <RadioGroup
-          defaultValue="is_actived"
-          name="radio-buttons-group"
-          sx={{
-            textAlign: "left",
-          }}
-        >
-          <FormControlLabel value="is_actived" control={<Radio />} label="Active" />
-         
-        </RadioGroup>
+            <TextField
+              name="name"
+              label="Name"
+              variant="outlined"
+              onChange={(e) => handleChange("name", e.target.value)}
+              fullWidth
+              value={rowData.name}
+              required
+            />
       </FormControl>
     </div>
   );
