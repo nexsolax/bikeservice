@@ -4,7 +4,7 @@ class Api
 {
     constructor() 
     {
-        this.baseURL = 'http://52.73.161.142';
+        this.baseURL = 'http://54.211.24.168';
 
         axios.interceptors.request.use(
             config =>

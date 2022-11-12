@@ -56,14 +56,14 @@ export default function StoreTable() {
   return {
     columns: [
       {
-        Header: "Name service",
+        Header: "Name store",
         accessor: "name",
         align: "left",
       },
-      { Header: "Price", accessor: "price", align: "left" },
-      { Header: "Quantity", accessor: "quantity", align: "center" },
-      { Header: "Manufacturer", accessor: "Manufacturer", align: "center" },
-      { Header: "Actions", accessor: "actions", align: "center" },
+      { Header: "Phone", accessor: "phoneNumber", align: "left" },
+      { Header: "Address", accessor: "address", align: "center" },
+      { Header: "Ward", accessor: "ward", align: "center" }
+     
     ],
     rows: stores || [],
     wards: wards || [],

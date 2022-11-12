@@ -8,29 +8,7 @@ import EventFeature from "hooks";
 
 
 
-function Category() {
 
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [manufacturers, setManufacturers] = useState([]);
-  const [stores, setStores] = useState([]);
-  
- 
-  function serviceCreate(products,categories,manufacturers,stores) {
-    setProducts(products) 
-    setCategories(categories) 
-    setManufacturers(manufacturers)
-    setStores(stores) 
-  }
- 
-  return {
-    products,
-    categories,
-    manufacturers,
-    stores,
-    serviceCreate
-  }
-}
 
 export default function CategoryTable(){
   /**
@@ -39,13 +17,7 @@ export default function CategoryTable(){
   =========================================================
   */
   const { doLoading, doError } = EventFeature() 
-  const {
-    products,
-    categories,
-    manufacturers,
-    stores,
-    serviceCreate
-  } = Category()
+  const [categories, setCategories] = useState([]);
   /**
   =========================================================
   * API CALL for INIT SERVICE:
@@ -57,25 +29,16 @@ export default function CategoryTable(){
       try {
         doLoading(true)
         const [
-          products,
-          categories,
-          manufacturers,
-          stores
+          name       
         ] = await Promise.all([
-            Api.getAllProducts(),
-            Api.getAllCategories(),
-            Api.getAllManufacturers(),
-            Api.getAllStores(),
+            Api.getAllCategories()            
           ]);
           if(isCall) {
             if (
-              _.isArray(products) ||
-              _.isArray(categories) ||
-              _.isArray(manufacturers) ||
-              _.isArray(stores)
+              _.isArray(name)           
             ) {
               doLoading(false)
-              serviceCreate(products,categories,manufacturers,stores)
+              setCategories(name)
               
             } else {
               doLoading(false)
@@ -105,18 +68,14 @@ export default function CategoryTable(){
   return {
     columns: [
       {
-        Header: "Name service",
+        Header: "Name category",
         accessor: "name",
         align: "left",
       },
-      { Header: "Price", accessor: "price", align: "left" },
-      { Header: "Quantity", accessor: "quantity", align: "center" },
-      { Header: "Manufacturer", accessor: "Manufacturer", align: "center" },
-      { Header: "Actions", accessor: "actions", align: "center" },
+      
     ],
-    rows: products || [],
-    categories: categories || [],
-    manufacturers: manufacturers || [],
-    stores: stores || [],
+    rows: 
+      categories || []
+    
   };
 }
